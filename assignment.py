@@ -7,7 +7,6 @@ def scrape(page_url):
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 }
     site = requests.get(page_url, headers=headers)
-    print(site.status_code)
    
     soup = BeautifulSoup(site.text, 'html.parser')
 
@@ -96,7 +95,7 @@ base_url = "https://www.amazon.in/s?k=bags&crid=2M096C61O4MLT&qid=1653308124&spr
 
 data = []
 
-for page in range(6,7):
+for page in range(5,7):
     page_url = base_url + '&page=' + str(page)
     page_data = scrape(page_url)
     data.extend(page_data)
@@ -107,7 +106,7 @@ with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=[ 'URL', 'Name', 'Price', 'Rating', 'Reviews','description', 'ASIN', 'product Description', 'manufacturer'])
     writer.writeheader()
     
-    for product in page_data:
+    for product in data:
         url = product.get('url', 'N/A')
         name = product.get('name', 'N/A')
         price = product.get('price', 'N/A')
