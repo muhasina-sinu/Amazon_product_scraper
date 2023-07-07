@@ -95,7 +95,7 @@ base_url = "https://www.amazon.in/s?k=bags&crid=2M096C61O4MLT&qid=1653308124&spr
 
 data = []
 
-for page in range(5,7):
+for page in range(1,21):
     page_url = base_url + '&page=' + str(page)
     page_data = scrape(page_url)
     data.extend(page_data)
